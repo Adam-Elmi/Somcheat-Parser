@@ -6,11 +6,9 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.ServeFile(w, r, "public/index.html")
-	})
+	http.Handle("/", http.FileServer(http.Dir(".")))
 
-	port := "3000"
+	port := "8080"
 	fmt.Println("Server running on http://localhost:" + port)
 	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
